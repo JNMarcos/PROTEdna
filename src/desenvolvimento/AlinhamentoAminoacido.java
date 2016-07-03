@@ -3,8 +3,6 @@
  */
 package desenvolvimento;
 
-import java.util.Hashtable;
-
 /**
  * @author JN
  *
@@ -12,6 +10,7 @@ import java.util.Hashtable;
 public class AlinhamentoAminoacido {
 	
 		//strings usadas no alinhamento
+		// são sequências de aminoácidos
 		private String sequenciaA;
 		private String sequenciaB;
 		
@@ -32,7 +31,13 @@ public class AlinhamentoAminoacido {
 		private int indiceMaiorFrequenciaNaRegiao;
 		
 		//indica qual o aminoácido mais presente na vizinhança do aminoácido com maior ocorrência
-		private Hashtable<Integer, Integer> contadorVizinhosAminoacidoMaiorFrequencia;
+		// usa o mesmo esquema que contadorAminoacidosRegiao
+		private int[] contadorVizinhosAminoacidoMaiorFrequencia;
+		
+		public AlinhamentoAminoacido(String sequenciaA, String sequenciaB){
+			this.sequenciaA = sequenciaA;
+			this.sequenciaB = sequenciaB;
+		}
 
 		public String getSequenciaA() {
 			return sequenciaA;
@@ -98,12 +103,12 @@ public class AlinhamentoAminoacido {
 			this.indiceMaiorFrequenciaNaRegiao = indiceMaiorFrequenciaNaRegiao;
 		}
 
-		public Hashtable<Integer, Integer> getContadorVizinhosAminoacidoMaiorFrequencia() {
+		public int[] getContadorVizinhosAminoacidoMaiorFrequencia() {
 			return contadorVizinhosAminoacidoMaiorFrequencia;
 		}
 
 		public void setContadorVizinhosAminoacidoMaiorFrequencia(
-				Hashtable<Integer, Integer> contadorVizinhosAminoacidoMaiorFrequencia) {
+				int[] contadorVizinhosAminoacidoMaiorFrequencia) {
 			this.contadorVizinhosAminoacidoMaiorFrequencia = contadorVizinhosAminoacidoMaiorFrequencia;
 		}
 }

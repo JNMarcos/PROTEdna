@@ -4,7 +4,6 @@
 package desenvolvimento;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import console.Dados;
@@ -17,17 +16,22 @@ import console.ManipularArquivos;
 public class AnalisarDNA {
 
 	private Dados dados;
-	private String codon;
 	private static final int TRINCA = 3;
-	private int[] quantidadeGC;
 
 	public AnalisarDNA (Dados dados){
 		this.dados = dados;
 	}
 
 	public void analisar(){
+		// usado para pegar o códon
+		String codon;
+		
+		//delimita a posição de início e de fim de um códon
 		int inicioCodon;
 		int fimCodon;
+		
+		//quantidade de GCs na sequência
+		int[] quantidadeGC;
 
 		List<SequenciaDNA> sequenciasArquivos;
 
@@ -41,7 +45,7 @@ public class AnalisarDNA {
 		//os nomes do arquivos são nomes de cores
 		for (String cor: ManipularArquivos.arquivos){
 			sequenciasArquivos = dados.getSequenciasDNA().get(cor);
-			this.quantidadeGC = new int[TRINCA];
+			quantidadeGC = new int[TRINCA];
 			for (SequenciaDNA sequencia: sequenciasArquivos){
 				
 				//seta os valores para a sequência
