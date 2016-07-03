@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import console.Dados;
-import console.LerArquivos;
+import console.ManipularArquivos;
 
 /**
  * @author JN
@@ -19,49 +19,48 @@ public class AnalisarDNA {
 	private Dados dados;
 	private String codon;
 	private static final int TRINCA = 3;
-	private HashMap<String, int[]> quantidadeGC;
+	private int[] quantidadeGC;
 
 	public AnalisarDNA (Dados dados){
 		this.dados = dados;
-		this.quantidadeGC = new HashMap<String, int[]>();
 	}
 
 	public void analisar(){
 		int inicioCodon;
 		int fimCodon;
-		int[] quantidadeGC = new int[TRINCA];
 
-		List<String> sequenciasArquivos;
+		List<SequenciaDNA> sequenciasArquivos;
 
 		//tem o número de códons de uma determinada sequencia
 		int nCodons;
 
 		//apenas conta o número de iterações, para não passar o tamanho da String = sequência
 		int contadorVezes;
-
+		//int nVezes = 0;
+		
 		//os nomes do arquivos são nomes de cores
-		for (String cor: LerArquivos.arquivos){
+		for (String cor: ManipularArquivos.arquivos){
 			sequenciasArquivos = dados.getSequenciasDNA().get(cor);
-			for (String sequencia: sequenciasArquivos){
+			this.quantidadeGC = new int[TRINCA];
+			for (SequenciaDNA sequencia: sequenciasArquivos){
+				
 				//seta os valores para a sequência
-
 				contadorVezes = 1;
 				inicioCodon = 0;
 				fimCodon = TRINCA;
-
+				
 				//tem de arredondar para baixo caso o tammanho das sequências não sejam
 				//necessariamente múltiplo de 3
-				nCodons = sequencia.length()/TRINCA;
+				nCodons = sequencia.getSequencia().length()/TRINCA;
 				
 				//seta todos os valores do array para zero
 				Arrays.fill(quantidadeGC, 0);
 
 				while (contadorVezes <= nCodons){
-					//System.out.println(codon);
-
 					//obtém-se um códon
-					codon = sequencia.substring(inicioCodon, fimCodon);
-
+					codon = sequencia.getSequencia().substring(inicioCodon, fimCodon);
+					System.out.println(codon);
+					
 					//altera os valores de início/fim para o próximo códon
 					inicioCodon = inicioCodon + TRINCA;
 					fimCodon = fimCodon + TRINCA;
@@ -79,10 +78,24 @@ public class AnalisarDNA {
 						quantidadeGC[2]++;
 					}
 					contadorVezes++;
+					
+					
 				}
 				
-				this.quantidadeGC.put(cor, quantidadeGC);
+				//nVezes++;
+				System.out.println(quantidadeGC[0] + "   " + quantidadeGC[1] + "  " +
+						 quantidadeGC[2]);
+				sequencia.setQuantidadeGC(quantidadeGC);
 			}
+			
 		}
+		
+		/*descomente caso queira
+		 * número de vezes que entra no for, que deve ser o número total de sequências, se for
+		 * diferente disso, tá errado
+		 * lembre de descomentar a declaração e adição a cada iteração (nVezes++) para obter
+		 * o resultado esperado
+		System.out.println(nVezes);
+		*/
 	}
 }

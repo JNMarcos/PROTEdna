@@ -10,21 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import desenvolvimento.SequenciaDNA;
+
 /**
  * @author JN
  *
  */
-public class LerArquivos {
+public class ManipularArquivos {
 
 	public static final String[] arquivos = {"Amarelo.txt", "Azul.txt", "Verde.txt", "Rosa.txt",
 			"Lilás.txt", "Marrom.txt", "Vermelho.txt"};
 
 	private static Scanner scannerSequencia = null;
 
-	public static HashMap<String, List<String>> lerDados(){
-		HashMap<String, List<String>> sequenciasDNA = new HashMap<String, List<String>>();
-		List<String> sequenciasArquivo = new ArrayList<String>();
+	public static HashMap<String, List<SequenciaDNA>> lerDados(){
+		HashMap<String, List<SequenciaDNA>> sequenciasDNA = new HashMap<String, List<SequenciaDNA>>();
+		List<SequenciaDNA> sequenciasArquivo;
 		String  sequencia;
+		String descricao;
 		
 		
 		for (String arquivo: arquivos){
@@ -37,19 +40,29 @@ public class LerArquivos {
 				e.printStackTrace();
 			}
 			
-			//enquanto tem fasta
+			//cria um ArrayList para adicionar cada uma das sequências de um arquivo 
+			sequenciasArquivo = new ArrayList<SequenciaDNA>();
+			
+			//enquanto tem sequencias no formato FASTA
 			while (scannerSequencia.hasNext()){
+				//pega a descrição
+				descricao = scannerSequencia.next();
+				descricao = descricao.substring(1); //retira o símbolo '>' da sequência
+				descricao = descricao.trim();
+				
+				//pega a sequência
 				sequencia = scannerSequencia.next();
 				sequencia = sequencia.toUpperCase(); // põe todas as letras para maiúscula
 				sequencia = sequencia.trim();
-				//diz o índice que se deve começar pegar
-				sequencia = sequencia.substring(1); //retira o símbolo '>' da sequência
-				sequenciasArquivo.add(sequencia);			
+				
+				//passa pela linha em branco
+				scannerSequencia.next();
+				
+				sequenciasArquivo.add(new SequenciaDNA(sequencia, descricao));
 			}
 			
-			sequenciasDNA.put(arquivo, sequenciasArquivo);	
+			sequenciasDNA.put(arquivo, sequenciasArquivo);
 			
-			sequenciasArquivo.clear();
 			//fecha o escâner
 			scannerSequencia.close();
 		}
