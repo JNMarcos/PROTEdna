@@ -3,6 +3,8 @@
  */
 package desenvolvimento;
 
+import java.util.List;
+
 /**
  * @author JN
  *
@@ -17,26 +19,17 @@ public class AlinhamentoAminoacido {
 		private String sequenciaAAlinhada;
 		private String sequenciaBAlinhada;
 		
-		// pega o índice que é delimitado aleatoriamente a região de baixa similaridade
-		// do alinhamento
-		private int indiceMenorRegiaoBaixaSimilaridade;
-		private int indiceMaiorRegiaoBaixaSimilaridade;
+		private List<RegiaoBaixaSimilaridade> regioesBaixaSimilaridadeA;
+		private List<RegiaoBaixaSimilaridade> regioesBaixaSimilaridadeB;
 		
-		//ver esse link para entender qual valor do índice representa determinado aminoácido
-		// https://tse3.mm.bing.net/th?id=OIP.Ma47917932878fc328ad6f617d92c2bf4o0&pid=15.1
-		private int[] contadorAminoacidosRegiao;
-		
-		// guarda o índice do array de contadorAminoacidosRegiao que possui maior valor
-		// sabendo assim qual o aminoáciodo que possui maior frequência
-		private int indiceMaiorFrequenciaNaRegiao;
-		
-		//indica qual o aminoácido mais presente na vizinhança do aminoácido com maior ocorrência
-		// usa o mesmo esquema que contadorAminoacidosRegiao
-		private int[] contadorVizinhosAminoacidoMaiorFrequencia;
-		
+		private String vetorAlinhamento;
+				
 		public AlinhamentoAminoacido(String sequenciaA, String sequenciaB){
-			this.sequenciaA = sequenciaA;
-			this.sequenciaB = sequenciaB;
+			this.setSequenciaA(sequenciaA);
+			this.setSequenciaB(sequenciaB);
+			
+			this.setSequenciaAAlinhada("");
+			this.setSequenciaBAlinhada("");
 		}
 
 		public String getSequenciaA() {
@@ -71,44 +64,27 @@ public class AlinhamentoAminoacido {
 			this.sequenciaBAlinhada = sequenciaBAlinhada;
 		}
 
-		public int getIndiceMenorRegiaoBaixaSimilaridade() {
-			return indiceMenorRegiaoBaixaSimilaridade;
+		public List<RegiaoBaixaSimilaridade> getRegioesBaixaSimilaridadeA() {
+			return regioesBaixaSimilaridadeA;
 		}
 
-		public void setIndiceMenorRegiaoBaixaSimilaridade(int indiceMenorRegiaoBaixaSimilaridade) {
-			this.indiceMenorRegiaoBaixaSimilaridade = indiceMenorRegiaoBaixaSimilaridade;
+		public void setRegioesBaixaSimilaridadeA(List<RegiaoBaixaSimilaridade> regioesBaixaSimilaridade) {
+			this.regioesBaixaSimilaridadeA = regioesBaixaSimilaridade;
 		}
 
-		public int getIndiceMaiorRegiaoBaixaSimilaridade() {
-			return indiceMaiorRegiaoBaixaSimilaridade;
+		public List<RegiaoBaixaSimilaridade> getRegioesBaixaSimilaridadeB() {
+			return regioesBaixaSimilaridadeB;
 		}
 
-		public void setIndiceMaiorRegiaoBaixaSimilaridade(int indiceMaiorRegiaoBaixaSimilaridade) {
-			this.indiceMaiorRegiaoBaixaSimilaridade = indiceMaiorRegiaoBaixaSimilaridade;
+		public void setRegioesBaixaSimilaridadeB(List<RegiaoBaixaSimilaridade> regioesBaixaSimilaridadeB) {
+			this.regioesBaixaSimilaridadeB = regioesBaixaSimilaridadeB;
 		}
 
-		public int[] getContadorAminoacidosRegiao() {
-			return contadorAminoacidosRegiao;
+		public String getVetorAlinhamento() {
+			return vetorAlinhamento;
 		}
 
-		public void setContadorAminoacidosRegiao(int[] contadorAminoacidosRegiao) {
-			this.contadorAminoacidosRegiao = contadorAminoacidosRegiao;
-		}
-
-		public int getIndiceMaiorFrequenciaNaRegiao() {
-			return indiceMaiorFrequenciaNaRegiao;
-		}
-
-		public void setIndiceMaiorFrequenciaNaRegiao(int indiceMaiorFrequenciaNaRegiao) {
-			this.indiceMaiorFrequenciaNaRegiao = indiceMaiorFrequenciaNaRegiao;
-		}
-
-		public int[] getContadorVizinhosAminoacidoMaiorFrequencia() {
-			return contadorVizinhosAminoacidoMaiorFrequencia;
-		}
-
-		public void setContadorVizinhosAminoacidoMaiorFrequencia(
-				int[] contadorVizinhosAminoacidoMaiorFrequencia) {
-			this.contadorVizinhosAminoacidoMaiorFrequencia = contadorVizinhosAminoacidoMaiorFrequencia;
+		public void setVetorAlinhamento(String vetorAlinhamento) {
+			this.vetorAlinhamento = vetorAlinhamento;
 		}
 }

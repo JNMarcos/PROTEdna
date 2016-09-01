@@ -7,11 +7,12 @@ package desenvolvimento;
  * @author JN
  *
  */
-public class SequenciaDNA {
+public class SequenciaDNA{
 	
 	private String sequencia;
 	private String descricao;
 	private int[] quantidadeGC;
+	private int[] nBasesEmCadaPosicaoDeTamanhoCodon;
 	
 	public SequenciaDNA(String sequencia, String descricao){
 		this.setSequencia(sequencia);
@@ -35,5 +36,10 @@ public class SequenciaDNA {
 	public void setQuantidadeGC(int[] quantidadeGC) {
 		this.quantidadeGC = quantidadeGC;
 	}
-
+	public int[] getnBasesEmCadaPosicaoDeTamanhoCodon() {
+		return nBasesEmCadaPosicaoDeTamanhoCodon;
+	}
+	public void setnBasesEmCadaPosicaoDeTamanhoCodon(int[] nBasesEmCadaPosicaoDeTamanhoCodon) {
+		this.nBasesEmCadaPosicaoDeTamanhoCodon = nBasesEmCadaPosicaoDeTamanhoCodon;
+	}
 }
